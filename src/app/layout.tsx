@@ -58,8 +58,11 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-/** Applies a saved "Pause animations" choice before first paint, so CSS motion never starts. */
-const motionBootstrap = `try{if(localStorage.getItem("jk:motion-paused")==="1")document.documentElement.dataset.motion="paused"}catch(e){}`;
+/**
+ * Before first paint: applies a saved "Pause animations" choice, so CSS motion never starts,
+ * and skips the boot screen on repeat visits within the same tab session.
+ */
+const motionBootstrap = `try{var d=document.documentElement.dataset;if(localStorage.getItem("jk:motion-paused")==="1")d.motion="paused";if(sessionStorage.getItem("jk:intro"))d.intro="off";else sessionStorage.setItem("jk:intro","1")}catch(e){}`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

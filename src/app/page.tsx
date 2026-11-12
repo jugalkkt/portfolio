@@ -2,6 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { LayerRail } from "@/components/layout/LayerRail";
 import { ParticleFlow } from "@/components/canvas/ParticleFlow";
+import { BootScreen } from "@/components/layout/BootScreen";
 import { SiteMotion } from "@/components/motion/SiteMotion";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
@@ -22,6 +23,7 @@ export default function Home() {
           __html: JSON.stringify(personJsonLd()).replace(/</g, "\\u003c"),
         }}
       />
+      <BootScreen />
       <ParticleFlow />
       <SiteMotion />
       <Header />

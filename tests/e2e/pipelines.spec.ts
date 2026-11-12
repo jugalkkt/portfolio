@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Page } from "./fixtures";
 import { collectConsoleProblems } from "./console";
 
 // Low tier: lightest hero, no particle field — keeps headless frame rates usable.

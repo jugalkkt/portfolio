@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./fixtures";
 import { collectConsoleProblems } from "./console";
 
 const sections = ["top", "about", "projects", "skills", "experience", "education", "contact"];
