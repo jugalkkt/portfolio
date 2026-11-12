@@ -25,7 +25,7 @@ export function About() {
       <div className="container-page">
         <SectionHeading id="about" title="About" />
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
-          <div className="flex flex-col gap-8 lg:col-span-6">
+          <div data-reveal className="flex flex-col gap-8 lg:col-span-6">
             {portrait ? (
               // eslint-disable-next-line @next/next/no-img-element -- static export, pre-sized asset
               <img
@@ -40,7 +40,7 @@ export function About() {
             ) : null}
             <p className="prose-measure text-[1.1875rem] leading-[1.7] text-text">{copy.about}</p>
           </div>
-          <figure className="lg:col-span-6">
+          <figure data-reveal className="lg:col-span-6">
             <figcaption className="label mb-3">model_card.yaml</figcaption>
             <dl className="overflow-x-auto rounded-card border border-line bg-bg-inset p-5 font-mono text-small leading-7 shadow-[inset_0_1px_0_rgb(255_255_255/0.04)] md:p-6">
               {modelCard().map(([k, v]) => (

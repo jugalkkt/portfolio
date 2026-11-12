@@ -4,8 +4,10 @@ import { cn } from "@/lib/cn";
 export function Card({ children, className }: { children: ReactNode; className?: string }) {
   return (
     <div
+      data-glow
+      data-reveal
       className={cn(
-        "rounded-card border border-line bg-bg-raised p-6 shadow-[inset_0_1px_0_rgb(255_255_255/0.04)] md:p-8",
+        "glow-card rounded-card border border-line bg-bg-raised p-6 shadow-[inset_0_1px_0_rgb(255_255_255/0.04)] md:p-8",
         className,
       )}
     >

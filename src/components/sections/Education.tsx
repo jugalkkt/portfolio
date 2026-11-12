@@ -31,7 +31,7 @@ export function Education() {
                     href={c.href}
                     className="group flex min-h-14 items-center justify-between gap-4 py-3 transition-colors hover:text-signal"
                   >
-                    <span>{c.name}</span>
+                    <span className="link-draw">{c.name}</span>
                     <ArrowUpRight
                       className="size-4 shrink-0 text-muted group-hover:text-signal"
                       aria-hidden="true"

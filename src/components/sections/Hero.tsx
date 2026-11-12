@@ -1,3 +1,4 @@
+import { Fragment, type CSSProperties } from "react";
 import { ArrowDown, Download, Mail } from "lucide-react";
 import { copy } from "@/content/copy";
 import { identity } from "@/content/resume";
@@ -9,6 +10,9 @@ import { HeroVisual } from "@/components/hero/HeroVisual";
 
 const iconLink =
   "inline-flex size-11 items-center justify-center rounded-chip border border-line text-muted transition-colors duration-150 hover:border-signal hover:text-text";
+
+/** A7: the tagline streams in word-token by word-token. */
+const tokens = copy.hero.tagline.split(" ");
 
 export function Hero() {
   return (
@@ -40,11 +44,24 @@ export function Hero() {
             />
             <p className="text-h3 font-medium text-text">{identity.headline}</p>
           </div>
-          <p className="prose-measure text-h3 font-normal text-muted">{copy.hero.tagline}</p>
+          {/* A7: real text, streamed word-token by word-token in CSS (no JS needed). */}
+          <p data-stream className="prose-measure text-h3 font-normal text-muted">
+            {tokens.map((word, i) => (
+              <Fragment key={i}>
+                <span
+                  className={i === tokens.length - 1 ? "stream-token is-last" : "stream-token"}
+                  style={{ "--i": i } as CSSProperties}
+                >
+                  {word}
+                  <span aria-hidden="true" className="stream-caret" />
+                </span>{" "}
+              </Fragment>
+            ))}
+          </p>
           <p className="prose-measure text-muted">{copy.hero.subLine}</p>
 
           <div className="mt-2 flex flex-wrap items-center gap-3">
-            <ButtonLink href="#projects" variant="primary">
+            <ButtonLink href="#projects" variant="primary" magnetic>
               View projects
             </ButtonLink>
             <ButtonLink href={identity.resumePdfPath} download>

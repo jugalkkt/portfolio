@@ -48,7 +48,8 @@ test.describe("particle flow (A2)", () => {
       await page.goto("/?debug=1&tier=high");
       await page.waitForTimeout(1500);
       await expect(page.locator("canvas[data-particle-flow]")).toHaveCount(0);
-      await expect(page.locator("canvas")).toHaveCount(0);
+      // No WebGL at all; the blank Contact canvas (A8) is never drawn to in reduced motion.
+      await expect(page.locator("canvas:not([data-converge])")).toHaveCount(0);
     });
   });
 });

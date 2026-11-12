@@ -4,6 +4,7 @@ import { copy } from "@/content/copy";
 import { identity } from "@/content/resume";
 import { section } from "@/content/sections";
 import { CopyButton } from "@/components/ui/CopyButton";
+import { Kicker } from "@/components/ui/SectionHeading";
 import { ExternalLink } from "@/components/ui/ExternalLink";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/icons";
 
@@ -33,28 +34,41 @@ export function Contact() {
     <section
       id="contact"
       aria-labelledby="contact-title"
-      className="relative py-[var(--section-pad)]"
+      className="relative isolate py-[var(--section-pad)]"
+      data-contact
     >
+      {/* A8: converging nodes are drawn here by the lazy motion module. */}
+      <canvas
+        aria-hidden="true"
+        data-converge
+        className="pointer-events-none absolute inset-0 -z-10 h-full w-full"
+      />
       <div className="container-page grid grid-cols-1 gap-12 lg:grid-cols-12">
-        <div className="flex flex-col gap-6 lg:col-span-5">
+        <div data-reveal className="flex flex-col gap-6 lg:col-span-5">
           <p data-layer-label className="label flex items-center gap-3 text-signal">
             <span
               aria-hidden="true"
               className="inline-block h-px w-8 bg-gradient-to-r from-signal to-activation"
             />
-            {section("contact").layer}
+            <Kicker text={section("contact").layer} />
           </p>
           <h2 id="contact-title" className="text-display leading-[1.02] tracking-[-0.03em]">
             {copy.contact.heading}
           </h2>
           <p className="prose-measure text-h3 font-normal text-muted">{copy.contact.line}</p>
         </div>
-        <ul className="flex flex-col border-t border-line lg:col-span-7 lg:self-end">
+        <ul data-reveal className="flex flex-col border-t border-line lg:col-span-7 lg:self-end">
           <Row
             label="Email"
             action={<CopyButton value={identity.email.label} label="Copy email address" />}
           >
-            <a href={identity.email.href} className={rowLink}>
+            <a href={identity.email.href} className={`relative ${rowLink}`} data-email-link>
+              {/* A8 output node: static glow without JS / in reduced motion. */}
+              <span
+                aria-hidden="true"
+                data-output-node
+                className="output-node absolute -left-4 top-1/2 -mt-1"
+              />
               <Mail
                 className="size-5 shrink-0 text-muted group-hover:text-signal"
                 aria-hidden="true"

@@ -5,7 +5,7 @@ import { ExternalLink } from "./ExternalLink";
 type Variant = "primary" | "secondary" | "ghost";
 
 const base =
-  "min-h-11 items-center justify-center gap-2 rounded-chip border px-4 text-small font-medium transition-colors duration-150 ease-out";
+  "btn-sweep min-h-11 items-center justify-center gap-2 rounded-chip border px-4 text-small font-medium transition-colors duration-150 ease-out";
 
 const variants: Record<Variant, string> = {
   primary: "border-signal/60 bg-signal/10 text-text hover:border-signal hover:bg-signal/15",
@@ -19,6 +19,8 @@ type Props = {
   variant?: Variant;
   external?: boolean;
   download?: boolean;
+  /** A9: slight pull toward the pointer (fine pointers, full motion; lazy-enhanced). */
+  magnetic?: boolean;
   className?: string;
   "aria-label"?: string;
 };
@@ -29,19 +31,21 @@ export function ButtonLink({
   variant = "secondary",
   external,
   download,
+  magnetic,
   className,
   ...rest
 }: Props) {
+  const extra = magnetic ? { ...rest, "data-magnetic": "" } : rest;
   const cls = clsx("inline-flex", base, variants[variant], className);
   if (external) {
     return (
-      <ExternalLink href={href} className={cls} {...rest}>
+      <ExternalLink href={href} className={cls} {...extra}>
         {children}
       </ExternalLink>
     );
   }
   return (
-    <a href={href} className={cls} download={download || undefined} {...rest}>
+    <a href={href} className={cls} download={download || undefined} {...extra}>
       {children}
     </a>
   );

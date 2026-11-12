@@ -14,9 +14,19 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
+/** Applies a saved "Pause animations" choice before first paint, so CSS motion never starts. */
+const motionBootstrap = `try{if(localStorage.getItem("jk:motion-paused")==="1")document.documentElement.dataset.motion="paused"}catch(e){}`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html
+      lang="en"
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: motionBootstrap }} />
+      </head>
       <body>
         <a className="skip-link" href="#main">
           Skip to content

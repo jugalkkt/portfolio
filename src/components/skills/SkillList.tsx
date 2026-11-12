@@ -13,7 +13,7 @@ export function SkillList({ compact = false }: { compact?: boolean }) {
       )}
     >
       {skills.map((g, i) => (
-        <div key={g.group} className="flex flex-col gap-3 border-t border-line pt-4">
+        <div key={g.group} data-reveal className="flex flex-col gap-3 border-t border-line pt-4">
           <h3 className="label flex items-center gap-2">
             <span className={i < 3 ? "text-signal" : "text-muted"} aria-hidden="true">
               {String(i + 1).padStart(2, "0")}

@@ -2,6 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { LayerRail } from "@/components/layout/LayerRail";
 import { ParticleFlow } from "@/components/canvas/ParticleFlow";
+import { SiteMotion } from "@/components/motion/SiteMotion";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Projects } from "@/components/sections/Projects";
@@ -14,6 +15,7 @@ export default function Home() {
   return (
     <>
       <ParticleFlow />
+      <SiteMotion />
       <Header />
       <LayerRail />
       {/* Content sits above the fixed particle canvas (z-0). */}

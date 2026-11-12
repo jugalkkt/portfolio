@@ -89,7 +89,9 @@ export function ProjectPanel({ project, index, featured }: Props) {
   return (
     <article
       aria-labelledby={`project-${project.id}`}
-      className="rounded-panel border border-line bg-bg-raised/80 p-5 shadow-[inset_0_1px_0_rgb(255_255_255/0.04)] sm:p-8 lg:p-10"
+      data-glow
+      data-reveal
+      className="glow-card rounded-panel border border-line bg-bg-raised/80 p-5 shadow-[inset_0_1px_0_rgb(255_255_255/0.04)] sm:p-8 lg:p-10"
     >
       {featured ? (
         <div className="flex flex-col gap-8">

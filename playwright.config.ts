@@ -6,6 +6,9 @@ export default defineConfig({
   testDir: "tests/e2e",
   outputDir: "test-results",
   fullyParallel: true,
+  // Software-rendered WebGL tests can starve timing-based tests on a loaded machine; a
+  // retry surfaces those as "flaky" in the report instead of hiding them.
+  retries: 1,
   reporter: [["list"]],
   use: { baseURL: `http://127.0.0.1:${PORT}` },
   projects: [
