@@ -158,8 +158,8 @@ describe("resume content", () => {
 });
 
 describe("proposed copy", () => {
-  it("is marked PROPOSED until the owner approves it", () => {
-    expect(copy.status).toBe("PROPOSED");
+  it("is marked APPROVED (owner approved 2026-11-12)", () => {
+    expect(copy.status).toBe("APPROVED");
   });
 
   it("contains no banned self-descriptions", () => {

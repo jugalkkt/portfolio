@@ -1,6 +1,8 @@
 import { expect, test } from "@playwright/test";
 
-test("home page renders the owner's name and title", async ({ page }, testInfo) => {
+const sections = ["top", "about", "projects", "skills", "experience", "education", "contact"];
+
+test("home page renders every section without console errors", async ({ page }, testInfo) => {
   const errors: string[] = [];
   page.on("console", (msg) => {
     if (msg.type() === "error" || msg.type() === "warning") errors.push(msg.text());
@@ -19,9 +21,50 @@ test("home page renders the owner's name and title", async ({ page }, testInfo) 
   );
   expect(noHorizontalScroll).toBe(true);
 
+  for (const id of sections) {
+    const el = page.locator(`#${id}`);
+    await el.scrollIntoViewIfNeeded();
+    await el.screenshot({ path: `test-results/screens/${testInfo.project.name}-${id}.png` });
+  }
+  const graphs = page.locator("#projects svg[role=img]:visible");
+  for (let i = 0; i < (await graphs.count()); i++) {
+    await graphs
+      .nth(i)
+      .screenshot({ path: `test-results/screens/${testInfo.project.name}-graph-${i}.png` });
+  }
   await page.screenshot({
     path: `test-results/screens/home-${testInfo.project.name}.png`,
     fullPage: true,
   });
   expect(errors).toEqual([]);
+});
+
+test("resume PDF is served", async ({ request }) => {
+  const res = await request.get("/Jugal_Kakkat_Resume.pdf");
+  expect(res.status()).toBe(200);
+  expect(res.headers()["content-type"]).toBe("application/pdf");
+});
+
+test.describe("without JavaScript", () => {
+  test.use({ javaScriptEnabled: false });
+
+  test("all content and links are present", async ({ page }) => {
+    await page.goto("/");
+    for (const text of [
+      "Sherpa",
+      "Pathfinder",
+      "Shrinx",
+      "424 unit tests",
+      "Zephyr RTOS",
+      "Technical Club Mentor",
+      "Embedded Software Intern",
+      "2023 – Present",
+      "HackerRank SQL (Intermediate)",
+      "jugalkakkat@gmail.com",
+    ]) {
+      await expect(page.getByText(text, { exact: false }).first()).toBeVisible();
+    }
+    await expect(page.locator('a[href="https://sherpa-study.streamlit.app"]')).toHaveCount(1);
+    await expect(page.locator('a[href="tel:+917592028073"]')).toHaveCount(1);
+  });
 });

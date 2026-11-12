@@ -1,10 +1,10 @@
 /**
- * Site copy that summarises resume facts but has NOT yet been approved by the owner.
- * Everything here is PROPOSED — edit freely. Facts themselves live in resume.ts.
+ * Site copy that summarises resume facts (not facts themselves).
+ * Approved by the owner on 2026-11-12 — still edit freely. Facts themselves live in resume.ts.
  */
 
 export const copy = {
-  status: "PROPOSED" as "PROPOSED" | "APPROVED",
+  status: "APPROVED" as "PROPOSED" | "APPROVED",
 
   siteTitle: "Jugal Kakkat — Aspiring Agentic AI Engineer",
   metaDescription:
@@ -20,6 +20,12 @@ export const copy = {
 
   about:
     "I'm a fourth-year B.Tech Computer Science and Engineering student at IIIT Kottayam, focused on agentic AI. I build LangGraph pipelines where agents plan, call tools and hand off to each other, and I care about what happens after the demo: evaluation with DeepEval, sandboxing generated code, crash-safe checkpoints and real deployments. Outside my own projects, I mentor at the college technical club and help run hackathons.",
+
+  /**
+   * Portrait for the About section. The owner will supply the image — drop it in
+   * /public and fill this in (e.g. { src: "/portrait.webp", alt: "Jugal Kakkat", width: 800, height: 1000 }).
+   */
+  portrait: null as null | { src: string; alt: string; width: number; height: number },
 
   modelCard: {
     status: "open to opportunities",
