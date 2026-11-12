@@ -19,7 +19,7 @@ export function Hero() {
     >
       {/* A1 Live Inference Network; the static SVG poster is its fallback and placeholder. */}
       <HeroVisual
-        className="absolute inset-0 -z-10 opacity-40 lg:left-[38%] lg:opacity-100"
+        className="absolute inset-0 -z-10 opacity-40 lg:left-[38%] lg:right-16 lg:opacity-100 xl:right-20"
         poster={<HeroPoster className="h-full max-h-[760px] w-full max-w-[1040px]" />}
       />
       <div

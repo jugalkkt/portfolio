@@ -6,7 +6,7 @@ type Props = { id: SectionId; title: string; intro?: string };
 export function SectionHeading({ id, title, intro }: Props) {
   return (
     <header className="mb-12 flex flex-col gap-4 md:mb-16">
-      <p className="label flex items-center gap-3 text-signal">
+      <p data-layer-label className="label flex items-center gap-3 text-signal">
         <span
           aria-hidden="true"
           className="inline-block h-px w-8 bg-gradient-to-r from-signal to-activation"

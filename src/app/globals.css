@@ -217,3 +217,25 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* A3 rail: a pulse "arrives" at the current layer node. */
+@keyframes rail-pulse {
+  from {
+    opacity: 0.9;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+
+.rail-pulse {
+  animation: rail-pulse 900ms var(--ease-out) both;
+}
+
+/* "Pause animations" toggle: stop CSS-driven motion site-wide. */
+:root[data-motion="paused"] .rail-pulse {
+  animation: none;
+  opacity: 0;
+}

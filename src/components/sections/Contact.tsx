@@ -37,7 +37,7 @@ export function Contact() {
     >
       <div className="container-page grid grid-cols-1 gap-12 lg:grid-cols-12">
         <div className="flex flex-col gap-6 lg:col-span-5">
-          <p className="label flex items-center gap-3 text-signal">
+          <p data-layer-label className="label flex items-center gap-3 text-signal">
             <span
               aria-hidden="true"
               className="inline-block h-px w-8 bg-gradient-to-r from-signal to-activation"

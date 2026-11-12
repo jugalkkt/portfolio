@@ -1,19 +1,13 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  useSyncExternalStore,
-  type ReactNode,
-} from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { inputSkills, outputSections } from "@/content/heroNetwork";
 import { useInView } from "@/hooks/useInView";
 import { useMotionPreference, type MotionPreference } from "@/hooks/useMotionPreference";
 import { usePageVisible } from "@/hooks/usePageVisible";
-import { detectDevice, lowerTier, pickTier, type QualityTier } from "@/lib/capabilities";
+import { lowerTier, type QualityTier } from "@/lib/capabilities";
+import { useQualityTier } from "@/hooks/useQualityTier";
 import { HeroBridge } from "@/components/three/InferenceNetwork/bridge";
 import { clsx } from "clsx";
 
@@ -23,17 +17,6 @@ const HeroCanvas = dynamic(() => import("@/components/three/HeroCanvas"), { ssr:
 /** Clicks on these are content, not "empty space" for click-to-infer. */
 const CONTENT = "a, button, h1, p, [data-hero-content]";
 
-let detectedTier: QualityTier | null = null;
-const noSubscribe = () => () => {};
-const getDetectedTier = () => (detectedTier ??= pickTier(detectDevice()));
-const getDebug = () => new URLSearchParams(window.location.search).get("debug") === "1";
-/** ?debug=1&tier=high|medium|low pins the tier (no auto-downgrade) for tuning and tests. */
-const getForcedTier = (): QualityTier | null => {
-  const params = new URLSearchParams(window.location.search);
-  const t = params.get("tier");
-  return params.get("debug") === "1" && (t === "high" || t === "medium" || t === "low") ? t : null;
-};
-
 export function HeroVisual({ poster, className }: { poster: ReactNode; className?: string }) {
   const container = useRef<HTMLDivElement>(null);
   const label = useRef<HTMLDivElement>(null);
@@ -41,11 +24,8 @@ export function HeroVisual({ poster, className }: { poster: ReactNode; className
   const [downgrades, setDowngrades] = useState(0);
   const [ready, setReady] = useState(false);
 
-  // Server render and hydration use "static" (the poster); the real tier is read after.
-  const detected = useSyncExternalStore(noSubscribe, getDetectedTier, () => "static" as const);
-  const debug = useSyncExternalStore(noSubscribe, getDebug, () => false);
-  const forced = useSyncExternalStore(noSubscribe, getForcedTier, () => null);
-  let tier: QualityTier = forced ?? detected;
+  const { tier: detected, forced, debug } = useQualityTier();
+  let tier: QualityTier = detected;
   if (!forced) for (let i = 0; i < downgrades; i++) tier = lowerTier(tier);
 
   const motion = useMotionPreference();
@@ -119,7 +99,12 @@ export function HeroVisual({ poster, className }: { poster: ReactNode; className
   const showCanvas = webgl && ready;
 
   return (
-    <div ref={container} aria-hidden="true" className={clsx("pointer-events-none", className)}>
+    <div
+      ref={container}
+      data-hero-visual
+      aria-hidden="true"
+      className={clsx("pointer-events-none", className)}
+    >
       <div
         className={clsx(
           "absolute inset-0 flex items-center justify-center transition-opacity duration-700 ease-out",
