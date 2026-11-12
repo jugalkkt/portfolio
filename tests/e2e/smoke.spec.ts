@@ -1,12 +1,10 @@
 import { expect, test } from "@playwright/test";
+import { collectConsoleProblems } from "./console";
 
 const sections = ["top", "about", "projects", "skills", "experience", "education", "contact"];
 
 test("home page renders every section without console errors", async ({ page }, testInfo) => {
-  const errors: string[] = [];
-  page.on("console", (msg) => {
-    if (msg.type() === "error" || msg.type() === "warning") errors.push(msg.text());
-  });
+  const errors = collectConsoleProblems(page);
 
   await page.goto("/");
   await expect(page).toHaveTitle("Jugal Kakkat — Aspiring Agentic AI Engineer");

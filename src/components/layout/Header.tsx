@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { navSections } from "@/content/sections";
 import { identity } from "@/content/resume";
 import { buttonClasses } from "@/components/ui/Button";
-import { cn } from "@/lib/cn";
+import { clsx } from "clsx";
 import { MobileMenu } from "./MobileMenu";
 import { MotionToggle } from "./MotionToggle";
 
@@ -20,7 +20,7 @@ export function Header() {
 
   return (
     <header
-      className={cn(
+      className={clsx(
         "fixed inset-x-0 top-0 z-40 border-b transition-[background-color,border-color] duration-300 ease-out",
         scrolled ? "border-line bg-bg/75 backdrop-blur-md" : "border-transparent bg-transparent",
       )}
@@ -52,11 +52,11 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <MotionToggle className="hidden lg:inline-flex" />
+          <MotionToggle display="hidden lg:inline-flex" />
           <a
             href={identity.resumePdfPath}
             download
-            className={cn(buttonClasses("secondary"), "hidden sm:inline-flex")}
+            className={buttonClasses("secondary", "hidden sm:inline-flex")}
           >
             Resume
           </a>

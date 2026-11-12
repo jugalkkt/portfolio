@@ -22,10 +22,19 @@ export const copy = {
     "I'm a fourth-year B.Tech Computer Science and Engineering student at IIIT Kottayam, focused on agentic AI. I build LangGraph pipelines where agents plan, call tools and hand off to each other, and I care about what happens after the demo: evaluation with DeepEval, sandboxing generated code, crash-safe checkpoints and real deployments. Outside my own projects, I mentor at the college technical club and help run hackathons.",
 
   /**
-   * Portrait for the About section. The owner will supply the image — drop it in
-   * /public and fill this in (e.g. { src: "/portrait.webp", alt: "Jugal Kakkat", width: 800, height: 1000 }).
+   * Portrait for the About section (owner-supplied, /public/portrait.webp). Set to null to hide.
    */
-  portrait: null as null | { src: string; alt: string; width: number; height: number },
+  portrait: {
+    src: "/portrait.webp",
+    alt: "Portrait of Jugal Kakkat",
+    width: 413,
+    height: 531,
+  } as null | {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  },
 
   modelCard: {
     status: "open to opportunities",

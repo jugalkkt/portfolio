@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { generateNetwork } from "@/components/three/InferenceNetwork/generateNetwork";
+import { forwardPass, generateNetwork } from "@/components/three/InferenceNetwork/generateNetwork";
 import { seededRandom } from "@/lib/seededRandom";
 
 describe("seededRandom", () => {
@@ -40,5 +40,30 @@ describe("generateNetwork", () => {
       ...net.edges.map((e) => e.weight),
     ];
     expect(values.every(Number.isFinite)).toBe(true);
+  });
+});
+
+describe("forwardPass", () => {
+  it("keeps inputs, outputs in (0,1), and is deterministic", () => {
+    const net = generateNetwork(5);
+    const inputs = [1, 0, 0.5, 0.2, 0.9, 0.1];
+    const a = forwardPass(net, inputs);
+    const b = forwardPass(net, inputs);
+    expect(Array.from(a)).toEqual(Array.from(b));
+    net.nodes.forEach((n) => {
+      if (n.layer === 0) expect(a[n.index]).toBeCloseTo(inputs[n.slot]);
+      else {
+        expect(a[n.index]).toBeGreaterThan(0);
+        expect(a[n.index]).toBeLessThan(1);
+      }
+    });
+  });
+
+  it("matches the textbook definition for a hidden node", () => {
+    const net = generateNetwork(9, [2, 1]);
+    const a = forwardPass(net, [1, 0.5], 1);
+    const [e0, e1] = net.edges;
+    const expected = 1 / (1 + Math.exp(-(e0.weight * 1 + e1.weight * 0.5 + net.nodes[2].bias)));
+    expect(a[2]).toBeCloseTo(expected, 5);
   });
 });

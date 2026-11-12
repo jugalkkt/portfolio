@@ -53,7 +53,7 @@ const sherpa: Pipeline = {
       source: "4-agent learning pipeline in LangGraph (planner, explainer, quiz, coach)",
       at: { desktop: [70, 120], mobile: [70, 40] },
     },
-    // Position of the HITL gate is a placeholder — the resume doesn't say which step it gates.
+    // Owner confirmed (2026-11-12): HITL approval comes after the planner.
     {
       id: "hitl",
       label: "HITL approval",

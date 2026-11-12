@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
-import { cn } from "@/lib/cn";
+import { clsx } from "clsx";
 import { ExternalLink } from "./ExternalLink";
 
 type Variant = "primary" | "secondary" | "ghost";
 
 const base =
-  "inline-flex min-h-11 items-center justify-center gap-2 rounded-chip border px-4 text-small font-medium transition-colors duration-150 ease-out";
+  "min-h-11 items-center justify-center gap-2 rounded-chip border px-4 text-small font-medium transition-colors duration-150 ease-out";
 
 const variants: Record<Variant, string> = {
   primary: "border-signal/60 bg-signal/10 text-text hover:border-signal hover:bg-signal/15",
@@ -32,7 +32,7 @@ export function ButtonLink({
   className,
   ...rest
 }: Props) {
-  const cls = cn(base, variants[variant], className);
+  const cls = clsx("inline-flex", base, variants[variant], className);
   if (external) {
     return (
       <ExternalLink href={href} className={cls} {...rest}>
@@ -47,5 +47,6 @@ export function ButtonLink({
   );
 }
 
-export const buttonClasses = (variant: Variant = "secondary", className?: string) =>
-  cn(base, variants[variant], className);
+/** `display` is its own slot so callers can hide the button without class conflicts. */
+export const buttonClasses = (variant: Variant = "secondary", display = "inline-flex") =>
+  clsx(display, base, variants[variant]);

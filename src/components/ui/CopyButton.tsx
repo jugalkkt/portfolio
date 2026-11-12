@@ -2,7 +2,7 @@
 
 import { Check, Copy } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { cn } from "@/lib/cn";
+import { clsx } from "clsx";
 
 /** Copies `value`; announces "Copied" via a polite live region (§5 A9). */
 export function CopyButton({
@@ -36,9 +36,11 @@ export function CopyButton({
         type="button"
         onClick={copy}
         aria-label={label}
-        className={cn(
-          "inline-flex size-11 items-center justify-center rounded-chip border border-line-strong text-muted transition-colors duration-150 hover:border-signal hover:text-text",
-          copied && "border-ok/60 text-ok",
+        className={clsx(
+          "inline-flex size-11 items-center justify-center rounded-chip border transition-colors duration-150",
+          copied
+            ? "border-ok/60 text-ok"
+            : "border-line-strong text-muted hover:border-signal hover:text-text",
           className,
         )}
       >

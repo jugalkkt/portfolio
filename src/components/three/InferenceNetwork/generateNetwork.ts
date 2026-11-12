@@ -64,3 +64,35 @@ export function generateNetwork(seed = DEFAULT_SEED, layerSizes = DEFAULT_LAYERS
 
   return { layerSizes: [...layerSizes], nodes, edges };
 }
+
+const sigmoid = (x: number) => 1 / (1 + Math.exp(-x));
+
+/** a_j = σ(gain · (Σ_i w_ij a_i + b_j)), computed layer by layer. Inputs fill layer 0. */
+export function forwardPass(net: Network, inputs: ArrayLike<number>, gain = 2.2): Float32Array {
+  const act = new Float32Array(net.nodes.length);
+  const sums = new Float32Array(net.nodes.length);
+  for (const n of net.nodes) if (n.layer === 0) act[n.index] = inputs[n.slot] ?? 0;
+  // Edges are generated layer by layer, so one ordered sweep is enough.
+  let layer = 1;
+  const finish = (l: number) => {
+    for (const n of net.nodes)
+      if (n.layer === l) act[n.index] = sigmoid(gain * (sums[n.index] + n.bias));
+  };
+  for (const e of net.edges) {
+    const l = net.nodes[e.to].layer;
+    if (l !== layer) {
+      finish(layer);
+      layer = l;
+    }
+    sums[e.to] += e.weight * act[e.from];
+  }
+  finish(layer);
+  return act;
+}
+
+/** Tier → layer sizes. Input (skills) and output (sections) layers always have 6 nodes. */
+export const TIER_LAYERS = {
+  high: [6, 10, 12, 10, 6],
+  medium: [6, 6, 6, 6, 6],
+  low: [6, 3, 2, 3, 6],
+} as const;

@@ -5,6 +5,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { ExternalLink } from "@/components/ui/ExternalLink";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/icons";
 import { HeroPoster } from "@/components/hero/HeroPoster";
+import { HeroVisual } from "@/components/hero/HeroVisual";
 
 const iconLink =
   "inline-flex size-11 items-center justify-center rounded-chip border border-line text-muted transition-colors duration-150 hover:border-signal hover:text-text";
@@ -16,16 +17,14 @@ export function Hero() {
       aria-labelledby="hero-title"
       className="relative isolate flex min-h-svh items-center overflow-hidden pt-16"
     >
-      {/* A1 lands here in Phase 2; the poster stays as its fallback. */}
+      {/* A1 Live Inference Network; the static SVG poster is its fallback and placeholder. */}
+      <HeroVisual
+        className="absolute inset-0 -z-10 opacity-40 lg:left-[38%] lg:opacity-100"
+        poster={<HeroPoster className="h-full max-h-[760px] w-full max-w-[1040px]" />}
+      />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center opacity-40 lg:left-[38%] lg:opacity-100"
-      >
-        <HeroPoster className="h-full max-h-[760px] w-full max-w-[1040px]" />
-      </div>
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_20%_50%,var(--bg)_25%,transparent_70%)]"
+        className="pointer-events-none absolute inset-0 -z-10 hidden bg-[radial-gradient(ellipse_at_20%_50%,var(--bg)_25%,transparent_70%)] lg:block"
       />
 
       <div className="container-page grid grid-cols-1 py-16 lg:grid-cols-12">

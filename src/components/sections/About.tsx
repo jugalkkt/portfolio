@@ -33,7 +33,9 @@ export function About() {
                 alt={portrait.alt}
                 width={portrait.width}
                 height={portrait.height}
-                className="aspect-[4/5] w-48 rounded-card border border-line object-cover"
+                loading="lazy"
+                decoding="async"
+                className="h-auto w-36 rounded-card border border-line-strong object-cover shadow-[0_0_0_4px_var(--bg-raised)] sm:w-44"
               />
             ) : null}
             <p className="prose-measure text-[1.1875rem] leading-[1.7] text-text">{copy.about}</p>
