@@ -43,9 +43,11 @@ function Graph({
   return (
     <svg
       viewBox={`0 0 ${w} ${h}`}
-      role="img"
+      role="group"
       aria-label={pipeline.summary}
-      className={cn("h-auto w-full", className)}
+      data-pipeline={pipeline.project}
+      data-layout={layout}
+      className={cn("h-auto w-full overflow-visible", className)}
     >
       <defs>
         <marker
@@ -78,6 +80,9 @@ function Graph({
           return (
             <path
               key={`${edge.from}-${edge.to}`}
+              data-edge={`${edge.from}>${edge.to}`}
+              data-order={edge.order}
+              data-dashed={edge.dashed ? "" : undefined}
               d={d}
               stroke={edge.dashed ? "var(--line-strong)" : "var(--text-faint)"}
               strokeDasharray={edge.dashed ? "4 4" : undefined}
@@ -95,6 +100,7 @@ function Graph({
           return (
             <text
               key={`label-${e.from}-${e.to}`}
+              data-edge-label={`${e.from}>${e.to}`}
               x={x}
               y={y}
               textAnchor="middle"
@@ -116,7 +122,17 @@ function Graph({
         const s = nodeStyle[node.kind];
         const isBadge = node.kind === "badge";
         return (
-          <g key={node.id}>
+          // Focusable so the resume-quote tooltip is reachable by keyboard (§5 A4).
+          <g
+            key={node.id}
+            data-node={node.id}
+            data-kind={node.kind}
+            data-source={node.source}
+            tabIndex={0}
+            role="img"
+            aria-label={`${node.label}${node.sub ? `, ${node.sub}` : ""}: “${node.source}”`}
+            className="pipeline-node"
+          >
             <title>{node.source}</title>
             <rect
               x={b.cx - b.w / 2}
@@ -129,6 +145,7 @@ function Graph({
               strokeDasharray={s.dash}
             />
             <text
+              data-node-label
               x={b.cx}
               y={node.sub ? b.cy - 4 : b.cy + (isBadge ? 3.5 : 4.5)}
               textAnchor="middle"
@@ -154,6 +171,9 @@ function Graph({
           </g>
         );
       })}
+
+      {/* Tokens and effects are drawn here by the lazy enhancer (top layer). */}
+      <g data-fx aria-hidden="true" />
     </svg>
   );
 }
@@ -161,7 +181,10 @@ function Graph({
 /** Static (fully drawn) pipeline diagram; horizontal ≥1024px, vertical variant below. */
 export function PipelineGraph({ pipeline }: { pipeline: Pipeline }) {
   return (
-    <div className="rounded-card border border-line bg-bg-inset p-2 sm:p-4 md:p-6">
+    <div
+      data-pipeline-root
+      className="relative rounded-card border border-line bg-bg-inset p-2 sm:p-4 md:p-6"
+    >
       <Graph pipeline={pipeline} layout="desktop" className="hidden lg:block" />
       <Graph pipeline={pipeline} layout="mobile" className="mx-auto max-w-[420px] lg:hidden" />
     </div>

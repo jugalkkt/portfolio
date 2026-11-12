@@ -239,3 +239,31 @@
   animation: none;
   opacity: 0;
 }
+
+/* A4 pipeline nodes: hover / focus / active states (driven by the lazy enhancer). */
+.pipeline-node {
+  outline: none;
+  cursor: default;
+}
+.pipeline-node rect {
+  transition:
+    stroke var(--dur-fast) var(--ease-out),
+    filter var(--dur-fast) var(--ease-out);
+}
+.pipeline-node:focus-visible rect,
+.pipeline-node.is-hot rect {
+  stroke: var(--signal);
+  stroke-width: 1.6;
+  filter: drop-shadow(0 0 6px rgb(79 209 232 / 0.35));
+}
+.pipeline-node.is-active rect {
+  stroke: var(--activation);
+  filter: drop-shadow(0 0 8px rgb(139 124 246 / 0.45));
+}
+[data-edge].is-hot {
+  stroke: var(--signal);
+}
+[data-edge].is-forced {
+  stroke: var(--signal);
+  stroke-width: 1.6;
+}
