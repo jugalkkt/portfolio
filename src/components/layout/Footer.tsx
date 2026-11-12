@@ -19,7 +19,7 @@ export function Footer() {
               <li key={s.id}>
                 <a
                   href={`#${s.id}`}
-                  className="inline-flex min-h-11 items-center text-small text-muted hover:text-text"
+                  className="inline-flex min-h-11 min-w-11 items-center text-small text-muted hover:text-text"
                 >
                   {s.nav}
                 </a>

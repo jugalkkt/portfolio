@@ -10,10 +10,18 @@ import { Skills } from "@/components/sections/Skills";
 import { Experience } from "@/components/sections/Experience";
 import { Education } from "@/components/sections/Education";
 import { Contact } from "@/components/sections/Contact";
+import { personJsonLd } from "@/content/jsonLd";
 
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        // JSON.stringify output is safe here: the data is static resume content.
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(personJsonLd()).replace(/</g, "\\u003c"),
+        }}
+      />
       <ParticleFlow />
       <SiteMotion />
       <Header />

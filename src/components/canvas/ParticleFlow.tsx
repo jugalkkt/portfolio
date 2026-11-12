@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useMotionPreference } from "@/hooks/useMotionPreference";
 import { usePageVisible } from "@/hooks/usePageVisible";
 import { useQualityTier } from "@/hooks/useQualityTier";
+import { useDeferredStart } from "@/hooks/useDeferredStart";
 import { particleFragment, particleVertex } from "./particleShaders";
 
 const COUNT = { high: 1500, medium: 800 } as const;
@@ -60,7 +61,8 @@ export function ParticleFlow() {
 
   const count = tier === "high" || tier === "medium" ? COUNT[tier] : 0;
   // Off on low/static tiers, phones and reduced motion (§5 A2, §9.3).
-  const enabled = count > 0 && motion !== "reduced";
+  const go = useDeferredStart();
+  const enabled = go && count > 0 && motion !== "reduced";
   const running = enabled && motion === "full" && visible;
 
   useEffect(() => {

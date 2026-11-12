@@ -82,7 +82,7 @@ export function SkillGraph({ className }: { className?: string }) {
               textAnchor="middle"
               dominantBaseline="central"
               letterSpacing="0.12em"
-              className={coreGroups.includes(g.group) ? "sg-dim fill-signal" : "sg-dim fill-faint"}
+              className={coreGroups.includes(g.group) ? "sg-dim fill-signal" : "sg-dim fill-muted"}
             >
               {g.group}
             </text>

@@ -14,6 +14,16 @@ async function debugText(page: Page) {
 test.describe("hero inference network (A1)", () => {
   test.skip(({ browserName }) => browserName !== "chromium", "WebGL via SwiftShader in Chromium");
 
+  test("WebGL waits for the first interaction; the poster shows until then", async ({ page }) => {
+    await page.goto("/?debug=1&tier=high");
+    await page.waitForLoadState("load");
+    await page.waitForTimeout(1500);
+    await expect(page.locator("canvas:not([data-converge])")).toHaveCount(0);
+    await expect(page.locator("#top [data-hero-visual] svg")).toBeVisible();
+    await page.mouse.move(300, 300);
+    await expect(page.locator("#top canvas")).toHaveCount(1, { timeout: 10_000 });
+  });
+
   test("canvas replaces the poster and runs without console errors", async ({ page }) => {
     const errors = collectConsoleProblems(page);
 

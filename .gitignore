@@ -48,3 +48,6 @@ next-env.d.ts
 /plan.md
 /JUGAL_KAKKAT.pdf
 /jugal-photo.jpeg
+
+# Local Lighthouse / audit output
+/reports/

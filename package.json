@@ -12,16 +12,14 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "build:skill-graph": "tsx scripts/build-skill-graph.ts"
+    "build:skill-graph": "tsx scripts/build-skill-graph.ts",
+    "build:brand": "tsx scripts/build-brand-assets.tsx"
   },
   "dependencies": {
     "@react-three/fiber": "^9.8.2",
-    "@react-three/postprocessing": "^3.2.2",
     "clsx": "^2.1.1",
-    "geist": "^1.9.2",
     "lucide-react": "^1.72.0",
     "next": "16.4.6",
-    "postprocessing": "^6.39.6",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "tailwind-merge": "^3.7.0",
@@ -39,6 +37,7 @@
     "d3-force": "^3.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
+    "geist": "^1.9.2",
     "prettier": "^3.9.10",
     "tailwindcss": "4.3.3",
     "tsx": "^4.23.15",

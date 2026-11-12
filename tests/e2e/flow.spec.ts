@@ -6,8 +6,17 @@ test.describe("particle flow (A2)", () => {
     test.skip(testInfo.project.name !== "desktop", "desktop only");
     const errors = collectConsoleProblems(page);
     await page.goto("/?debug=1&tier=high");
-    await expect(page.locator("canvas[data-particle-flow]")).toHaveCount(1);
-    await expect(page.locator("canvas")).toHaveCount(2); // ≤ 2 WebGL contexts (§9.1)
+    // Decorative WebGL starts on the first interaction; keep nudging in case an early move
+    // lands before the page's script has run.
+    let x = 400;
+    await expect
+      .poll(async () => {
+        await page.mouse.move((x += 7), 400);
+        return page.locator("canvas[data-particle-flow]").count();
+      })
+      .toBe(1);
+    // ≤ 2 WebGL contexts (§9.1); the Contact canvas (A8) is 2D.
+    await expect(page.locator("canvas:not([data-converge])")).toHaveCount(2);
     await expect
       .poll(() => page.getByTestId("particle-debug").textContent(), { timeout: 10_000 })
       .toMatch(/fps \d+/);

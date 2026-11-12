@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { inputSkills, outputSections } from "@/content/heroNetwork";
 import { useInView } from "@/hooks/useInView";
+import { useDeferredStart } from "@/hooks/useDeferredStart";
 import { useMotionPreference, type MotionPreference } from "@/hooks/useMotionPreference";
 import { usePageVisible } from "@/hooks/usePageVisible";
 import { lowerTier, type QualityTier } from "@/lib/capabilities";
@@ -31,7 +32,8 @@ export function HeroVisual({ poster, className }: { poster: ReactNode; className
   const motion = useMotionPreference();
   const visible = usePageVisible();
   const inView = useInView(container);
-  const webgl = tier !== "static" && motion !== "reduced";
+  const go = useDeferredStart();
+  const webgl = go && tier !== "static" && motion !== "reduced";
   const active = webgl && motion === "full" && inView && visible;
 
   // Pointer → bridge. Listeners sit on the hero section so text stays selectable.

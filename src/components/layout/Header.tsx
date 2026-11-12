@@ -28,7 +28,7 @@ export function Header() {
       <div className="container-page flex h-16 items-center justify-between gap-6">
         <a
           href="#top"
-          className="inline-flex min-h-11 items-center font-mono text-base font-medium tracking-tight"
+          className="inline-flex min-h-11 min-w-11 items-center font-mono text-base font-medium tracking-tight"
         >
           <span aria-hidden="true">
             J<span className="text-signal">K</span>
