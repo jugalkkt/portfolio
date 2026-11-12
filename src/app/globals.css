@@ -267,3 +267,71 @@
   stroke: var(--signal);
   stroke-width: 1.6;
 }
+
+/* A5 skill graph. Hover linking rules are generated inline by SkillGraph (CSS :has()). */
+.sg .sg-dim {
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+.sg-edge {
+  color: var(--line-strong);
+  stroke: currentColor;
+  stroke-width: 1;
+  stroke-opacity: 0.9;
+}
+.sg-node {
+  color: var(--text-faint);
+  cursor: default;
+}
+.sg-node.is-core {
+  color: var(--signal);
+}
+.sg-node circle {
+  fill: currentColor;
+}
+.sg-node text,
+.sg [data-groups] text {
+  /* Halo in the page colour so edges passing behind a label never cut through it. */
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.sg-node text {
+  fill: var(--text);
+  fill-opacity: 0.82;
+}
+.sg-project {
+  color: var(--activation);
+  cursor: default;
+}
+.sg-project rect {
+  fill: var(--bg-raised);
+  stroke: currentColor;
+  stroke-opacity: 0.7;
+}
+.sg-project text {
+  fill: var(--text);
+}
+.sg:has([data-k]:hover) .sg-dim {
+  opacity: 0.2;
+}
+@keyframes sg-drift {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  33% {
+    translate: var(--dx1) var(--dy1);
+  }
+  66% {
+    translate: var(--dx2) var(--dy2);
+  }
+}
+.sg-drift {
+  animation: sg-drift 9s ease-in-out infinite;
+}
+:root[data-motion="paused"] .sg-drift {
+  animation-play-state: paused;
+}

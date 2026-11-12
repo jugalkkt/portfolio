@@ -1,0 +1,250 @@
+{
+  "width": 760,
+  "height": 620,
+  "groups": [
+    {
+      "group": "Agentic AI",
+      "x": 290,
+      "y": 196.5
+    },
+    {
+      "group": "Observability",
+      "x": 351,
+      "y": 302
+    },
+    {
+      "group": "Testing & Debugging",
+      "x": 229.5,
+      "y": 292
+    },
+    {
+      "group": "Languages",
+      "x": 515,
+      "y": 261
+    },
+    {
+      "group": "Backend & APIs",
+      "x": 402.5,
+      "y": 427.5
+    },
+    {
+      "group": "Frontend",
+      "x": 402.5,
+      "y": 46
+    },
+    {
+      "group": "Databases",
+      "x": 177.5,
+      "y": 447
+    },
+    {
+      "group": "Tools & Systems",
+      "x": 65,
+      "y": 260
+    },
+    {
+      "group": "RTOS",
+      "x": 177.5,
+      "y": 84
+    }
+  ],
+  "skills": [
+    {
+      "name": "LangGraph",
+      "group": "Agentic AI",
+      "x": 303.5,
+      "y": 265.5
+    },
+    {
+      "name": "LangChain",
+      "group": "Agentic AI",
+      "x": 290,
+      "y": 217.5
+    },
+    {
+      "name": "CrewAI",
+      "group": "Agentic AI",
+      "x": 290,
+      "y": 241.5
+    },
+    {
+      "name": "Langfuse",
+      "group": "Observability",
+      "x": 350.5,
+      "y": 332
+    },
+    {
+      "name": "pytest",
+      "group": "Testing & Debugging",
+      "x": 229.5,
+      "y": 337
+    },
+    {
+      "name": "Streamlit AppTest",
+      "group": "Testing & Debugging",
+      "x": 229.5,
+      "y": 361
+    },
+    {
+      "name": "DeepEval",
+      "group": "Testing & Debugging",
+      "x": 240,
+      "y": 313
+    },
+    {
+      "name": "Python",
+      "group": "Languages",
+      "x": 501.5,
+      "y": 306
+    },
+    {
+      "name": "C",
+      "group": "Languages",
+      "x": 543.5,
+      "y": 300
+    },
+    {
+      "name": "C++",
+      "group": "Languages",
+      "x": 515,
+      "y": 330
+    },
+    {
+      "name": "Bash",
+      "group": "Languages",
+      "x": 506.5,
+      "y": 282
+    },
+    {
+      "name": "Node.js",
+      "group": "Backend & APIs",
+      "x": 402.5,
+      "y": 496.5
+    },
+    {
+      "name": "ExpressJS",
+      "group": "Backend & APIs",
+      "x": 402.5,
+      "y": 472.5
+    },
+    {
+      "name": "FastAPI",
+      "group": "Backend & APIs",
+      "x": 408,
+      "y": 544.5
+    },
+    {
+      "name": "REST APIs",
+      "group": "Backend & APIs",
+      "x": 402.5,
+      "y": 520.5
+    },
+    {
+      "name": "JWT Authentication",
+      "group": "Backend & APIs",
+      "x": 408,
+      "y": 448.5
+    },
+    {
+      "name": "HTML5",
+      "group": "Frontend",
+      "x": 402.5,
+      "y": 187
+    },
+    {
+      "name": "CSS3",
+      "group": "Frontend",
+      "x": 402.5,
+      "y": 67
+    },
+    {
+      "name": "JavaScript",
+      "group": "Frontend",
+      "x": 402.5,
+      "y": 91
+    },
+    {
+      "name": "React",
+      "group": "Frontend",
+      "x": 402.5,
+      "y": 163
+    },
+    {
+      "name": "Jinja2",
+      "group": "Frontend",
+      "x": 409.5,
+      "y": 115
+    },
+    {
+      "name": "Streamlit",
+      "group": "Frontend",
+      "x": 411,
+      "y": 139
+    },
+    {
+      "name": "MySQL",
+      "group": "Databases",
+      "x": 177.5,
+      "y": 492
+    },
+    {
+      "name": "PostgreSQL",
+      "group": "Databases",
+      "x": 177.5,
+      "y": 516
+    },
+    {
+      "name": "MongoDB",
+      "group": "Databases",
+      "x": 190,
+      "y": 468
+    },
+    {
+      "name": "Git",
+      "group": "Tools & Systems",
+      "x": 93.5,
+      "y": 305
+    },
+    {
+      "name": "GitHub",
+      "group": "Tools & Systems",
+      "x": 49.5,
+      "y": 329
+    },
+    {
+      "name": "Linux",
+      "group": "Tools & Systems",
+      "x": 51.5,
+      "y": 305
+    },
+    {
+      "name": "Unix Shell",
+      "group": "Tools & Systems",
+      "x": 65,
+      "y": 281
+    },
+    {
+      "name": "Zephyr RTOS",
+      "group": "RTOS",
+      "x": 177.5,
+      "y": 114
+    }
+  ],
+  "projects": [
+    {
+      "id": "sherpa",
+      "x": 690,
+      "y": 140
+    },
+    {
+      "id": "pathfinder",
+      "x": 690,
+      "y": 310
+    },
+    {
+      "id": "shrinx",
+      "x": 690,
+      "y": 480
+    }
+  ]
+}

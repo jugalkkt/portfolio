@@ -1,9 +1,17 @@
+import { clsx } from "clsx";
 import { skills } from "@/content/resume";
 
 /** Grouped list exactly as on the resume — the real content; the A5 graph enhances it. */
-export function SkillList() {
+export function SkillList({ compact = false }: { compact?: boolean }) {
   return (
-    <div className="grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+    <div
+      className={clsx(
+        "grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2",
+        compact
+          ? "lg:grid-cols-1 lg:gap-y-5 motion-reduce:lg:grid-cols-3 motion-reduce:lg:gap-y-8"
+          : "lg:grid-cols-3",
+      )}
+    >
       {skills.map((g, i) => (
         <div key={g.group} className="flex flex-col gap-3 border-t border-line pt-4">
           <h3 className="label flex items-center gap-2">
@@ -16,11 +24,11 @@ export function SkillList() {
             {g.items.map((item) => (
               <li
                 key={item}
-                className={
-                  i < 3
-                    ? "rounded-chip border border-signal/30 bg-signal/5 px-3 py-1.5 text-small text-text"
-                    : "rounded-chip border border-line bg-bg-raised px-3 py-1.5 text-small text-text"
-                }
+                className={clsx(
+                  "rounded-chip border px-3 py-1.5 text-small text-text",
+                  compact && "lg:py-1 motion-reduce:lg:py-1.5",
+                  i < 3 ? "border-signal/30 bg-signal/5" : "border-line bg-bg-raised",
+                )}
               >
                 {item}
               </li>

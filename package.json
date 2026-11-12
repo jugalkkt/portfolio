@@ -11,7 +11,8 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "build:skill-graph": "tsx scripts/build-skill-graph.ts"
   },
   "dependencies": {
     "@react-three/fiber": "^9.8.2",
@@ -30,10 +31,12 @@
     "@axe-core/playwright": "^4.14.0",
     "@playwright/test": "^1.65.0",
     "@tailwindcss/turbopack": "4.3.3",
+    "@types/d3-force": "^3.0.10",
     "@types/node": "^24.19.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "0.182.0",
+    "d3-force": "^3.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "prettier": "^3.9.10",

@@ -60,7 +60,9 @@ test.describe("without JavaScript", () => {
       "HackerRank SQL (Intermediate)",
       "jugalkakkat@gmail.com",
     ]) {
-      await expect(page.getByText(text, { exact: false }).first()).toBeVisible();
+      await expect(
+        page.getByText(text, { exact: false }).filter({ visible: true }).first(),
+      ).toBeVisible();
     }
     await expect(page.locator('a[href="https://sherpa-study.streamlit.app"]')).toHaveCount(1);
     await expect(page.locator('a[href="tel:+917592028073"]')).toHaveCount(1);
