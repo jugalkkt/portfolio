@@ -1,0 +1,12 @@
+# Upload only what the build needs.
+/node_modules
+/out
+/.next
+/test-results
+/playwright-report
+/reports
+/plan.md
+/JUGAL_KAKKAT.pdf
+/jugal-photo.jpeg
+*.tsbuildinfo
+/.env*
