@@ -1,34 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jugal Kakkat — portfolio
 
-## Getting Started
+Personal site of Jugal Kakkat, built as a single static page with a neural-network theme:
+a live inference network in the hero, particle flow behind the page, animated project
+pipelines, a skill graph and a signal-trace timeline. Every section is plain HTML first;
+the motion and WebGL are enhancements that switch off for reduced motion, paused
+animations, slow devices and browsers without a GPU.
 
-First, run the development server:
+Live: <https://jugal-kakkat.vercel.app>
+
+## Stack
+
+Next.js (App Router, static export) · React · TypeScript · Tailwind CSS v4 ·
+three.js with @react-three/fiber · Vitest · Playwright + axe.
+
+## Run it
+
+Requires Node 20 or newer.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # http://localhost:3000
+npm run build        # static site in out/
+node scripts/serve-out.mjs 4173   # serve out/ locally, gzip on, like production
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Editing content
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+All facts live in one file; nothing else on the page is hand-typed.
 
-## Learn More
+| What                                             | Where                                                       |
+| ------------------------------------------------ | ----------------------------------------------------------- |
+| Name, links, projects, experience, skills, dates | `src/content/resume.ts`                                     |
+| Headlines, taglines, button labels, meta text    | `src/content/copy.ts`                                       |
+| Section order, nav and layer labels              | `src/content/sections.ts`                                   |
+| Project pipeline diagrams                        | `src/content/pipelines.ts`                                  |
+| Which skills link to which project in the graph  | `src/content/skillGraph.ts`                                 |
+| Resume PDF / portrait                            | `public/Jugal_Kakkat_Resume.pdf`, `public/portrait.webp`    |
+| Site address (canonical, sitemap, social image)  | `src/content/site.ts` or the `NEXT_PUBLIC_SITE_URL` env var |
 
-To learn more about Next.js, take a look at the following resources:
+After changing skills or graph links, regenerate the graph layout (a unit test fails if
+it is stale):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build:skill-graph
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+After changing the name or headline, regenerate the social image and icons:
 
-## Deploy on Vercel
+```bash
+npm run build:brand
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Checks
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run typecheck
+npm run lint
+npm run format:check
+npm test             # unit tests
+npm run build && npm run test:e2e   # browser tests on 390 px and 1440 px
+```
+
+Append `?debug=1` to the URL for frame-rate readouts, and `&tier=high|medium|low` to pin
+the 3D quality tier.
+
+## Deploy
+
+The site is a static export hosted on Vercel. Pushing to `main` deploys to production;
+other branches get preview URLs. No environment variables are required; set
+`NEXT_PUBLIC_SITE_URL` only if the site moves to a different address.
