@@ -59,6 +59,7 @@ npm run lint
 npm run format:check
 npm test             # unit tests
 npm run build && npm run test:e2e   # browser tests on 390 px and 1440 px
+E2E_BASE_URL=https://jugal-kakkat.vercel.app npm run test:e2e   # same tests, live site
 ```
 
 Append `?debug=1` to the URL for frame-rate readouts, and `&tier=high|medium|low` to pin

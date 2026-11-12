@@ -1,6 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const PORT = 4173;
+// E2E_BASE_URL runs the suite against a deployment (e.g. production) instead of out/.
+const remote = process.env.E2E_BASE_URL;
 
 export default defineConfig({
   testDir: "tests/e2e",
@@ -10,7 +12,7 @@ export default defineConfig({
   // retry surfaces those as "flaky" in the report instead of hiding them.
   retries: 1,
   reporter: [["list"]],
-  use: { baseURL: `http://127.0.0.1:${PORT}` },
+  use: { baseURL: remote ?? `http://127.0.0.1:${PORT}` },
   projects: [
     {
       name: "mobile",
@@ -21,9 +23,11 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } },
     },
   ],
-  webServer: {
-    command: `node scripts/serve-out.mjs ${PORT}`,
-    url: `http://127.0.0.1:${PORT}`,
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: remote
+    ? undefined
+    : {
+        command: `node scripts/serve-out.mjs ${PORT}`,
+        url: `http://127.0.0.1:${PORT}`,
+        reuseExistingServer: !process.env.CI,
+      },
 });
